@@ -1,0 +1,2 @@
+rootProject.name = "FragmentStateAdapterDemo"
+include ':app'

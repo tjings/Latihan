@@ -1,0 +1,70 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="15dp"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User ID : "
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/userId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="user id"
+        app:layout_constraintStart_toEndOf="@id/tv1"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Post ID : "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv1" />
+    <TextView
+        android:id="@+id/postId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="post id"
+        app:layout_constraintTop_toBottomOf="@id/tv1"
+        app:layout_constraintStart_toEndOf="@id/tv2"/>
+
+    <TextView
+        android:id="@+id/tv3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Post Title : "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv2" />
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="title"
+        app:layout_constraintTop_toBottomOf="@id/tv2"
+        app:layout_constraintStart_toEndOf="@id/tv3"/>
+
+    <TextView
+        android:id="@+id/tv4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Post ID : "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv3" />
+    <TextView
+        android:id="@+id/body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="body"
+        app:layout_constraintTop_toBottomOf="@id/tv4"
+        app:layout_constraintStart_toStartOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

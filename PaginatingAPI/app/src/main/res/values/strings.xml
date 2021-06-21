@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">PaginatingAPI</string>
+    <string name="title_movie">PaginatingAPI</string>
+    <string name="_0_0">PaginatingAPI</string>
+    <string name="release_date">Release Date</string>
+    <string name="release_date_value">PaginatingAPI</string>
+    <string name="overview">Overview</string>
+    <string name="overview_value">PaginatingAPI</string>
+</resources>
