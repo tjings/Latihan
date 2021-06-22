@@ -21,7 +21,7 @@ object RetrofitObject {
 
     fun getNowPlaying(
         page: Int = 1,
-        onSuccess : (movies: ArrayList<Model>) -> Unit,
+        onSuccess : (movies: ArrayList<ModelKecil>) -> Unit,
         onError : () -> Unit
     ) {
         api.getNowPlaying(page = page)
@@ -32,9 +32,9 @@ object RetrofitObject {
                 ) {
                     if (response.isSuccessful) {
                         val responseBody = response.body()
-
+                        Log.d ("responseBodt", responseBody.toString())
                         if (responseBody != null) {
-                            onSuccess.invoke(ArrayList<response.body()>)
+                            onSuccess.invoke(responseBody.movies)
                         } else {
                             onError.invoke()
                         }

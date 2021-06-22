@@ -1,6 +1,8 @@
 package umn.ac.id.nestedrecyclerapilagi
 
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,13 +23,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun onError() {
         Toast.makeText(this, "Error Fetching", Toast.LENGTH_SHORT).show()
+        pb_main.setVisibility(View.GONE);
     }
 
-    private fun onFetched(arrayList: ArrayList<Model>) {
+    private fun onFetched(arrayList: ArrayList<ModelKecil>) {
         rv_main.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rv_main.adapter = HomeAdapter(this, arrayList)
 
-//        Log.d("MainActivity", "Movies: $arrayList")
+        pb_main.setVisibility(View.GONE);
+        Log.d("MainActivity", "Movies: $arrayList")
     }
 
 }
