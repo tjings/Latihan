@@ -32,7 +32,7 @@ object RetrofitObject {
                 ) {
                     if (response.isSuccessful) {
                         val responseBody = response.body()
-                        Log.d ("responseBodt", responseBody.toString())
+                        Log.d ("responseBodt", responseBody!!.movies.toString())
                         if (responseBody != null) {
                             onSuccess.invoke(responseBody.movies)
                         } else {
