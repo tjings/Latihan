@@ -6,5 +6,6 @@ data class ModelKecil (
     val poster_path: String,
     val title: String,
     val release_date : String,
-    val adult : Boolean
+    val adult : Boolean,
+    val genre_ids : ArrayList<Int>
 )

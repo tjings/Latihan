@@ -12,4 +12,8 @@ interface ApiClient {
         @Query("page") page: Int
     ) : Call<Model>
 
+    @GET("trending/movie/week")
+    fun getTrendingThisWeek(
+        @Query("api_key") apiKey: String = "ca3cae85bb1e478656da8986f49e7ec7",
+    ) : Call<Model>
 }

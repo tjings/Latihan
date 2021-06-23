@@ -21,7 +21,7 @@ object RetrofitObject {
 
     fun getNowPlaying(
         page: Int = 1,
-        onSuccess : (movies: ArrayList<ModelKecil>) -> Unit,
+        onSuccess : (movies: Model) -> Unit,
         onError : () -> Unit
     ) {
         api.getNowPlaying(page = page)
@@ -32,9 +32,40 @@ object RetrofitObject {
                 ) {
                     if (response.isSuccessful) {
                         val responseBody = response.body()
-                        Log.d ("responseBodt", responseBody!!.movies.toString())
+                        Log.d ("nowPlaying", responseBody.toString())
                         if (responseBody != null) {
-                            onSuccess.invoke(responseBody.movies)
+                            onSuccess.invoke(responseBody)
+                        } else {
+                            onError.invoke()
+                        }
+                    } else {
+                        onError.invoke()
+                    }
+                }
+
+                override fun onFailure(call: Call<Model>, t: Throwable) {
+                    onError.invoke()
+                    Log.e("Repository", "onFailure", t)
+                }
+            })
+    }
+
+    fun getTrendingThisWeek(
+        page: Int = 1,
+        onSuccess : (movies: Model) -> Unit,
+        onError : () -> Unit
+    ) {
+        api.getTrendingThisWeek()
+            .enqueue(object : Callback<Model> {
+                override fun onResponse(
+                    call: Call<Model>,
+                    response: Response<Model>
+                ) {
+                    if (response.isSuccessful) {
+                        val responseBody = response.body()
+                        Log.d ("trendingThisWeek", responseBody!!.movies.toString())
+                        if (responseBody != null) {
+                            onSuccess.invoke(responseBody)
                         } else {
                             onError.invoke()
                         }

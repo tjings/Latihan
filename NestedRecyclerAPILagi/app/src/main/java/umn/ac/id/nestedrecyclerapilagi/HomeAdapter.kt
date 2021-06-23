@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.row_layout_home.view.*
 
 class HomeAdapter(
-    var movie: ArrayList<ModelKecil>
+    var movie: List<Model>
 ) : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {}
 
@@ -19,29 +19,21 @@ class HomeAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-//        for(i in 0..movie.size){
-//            var temp = arrayListOf<Int>()
-//            var i : Int = 0
-//            if(movie[position].adult){
-//                temp[i] = position
-//                i++
-//            }
-//        }
-        holder.itemView.tv_movie_category.text = movie[position].release_date
+        holder.itemView.tv_movie_category.text = movie.get(position).category
         holder.itemView.home_recycler_view_horizontal.apply{
             layoutManager = LinearLayoutManager(
                 holder.itemView.home_recycler_view_horizontal.context,
                 RecyclerView.HORIZONTAL,
                 false
             )
-            adapter = MovieAdapter(movie)
+            adapter = MovieAdapter(movie[position].movies)
 //            Log.d("movieAdapter", movie.toString())
         }
 
     }
 
     override fun getItemCount(): Int {
-//        return movie.size
-        return 3
+        return movie.size
+//        return 3
     }
 }
