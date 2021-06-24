@@ -6,4 +6,6 @@ interface iMainActivity {
     fun onError()
     fun onFetchedNow(arrayListNow: Model)
     fun onFetchedTrending(arrayListTrending: Model)
+    fun onFetchedTop(arrayListTop: Model)
+    fun onFetchedUpcoming(arrayListUpcoming: Model)
 }

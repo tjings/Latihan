@@ -8,11 +8,11 @@ import umn.ac.id.mvpnestedrecycler.Api.ApiClient
 import umn.ac.id.mvpnestedrecycler.Api.ApiInterface
 import umn.ac.id.mvpnestedrecycler.Model.Model
 
-class MoviePresenter : iMoviePresenter {
+class MoviePresenter {
     private val api = ApiClient.createService(ApiInterface::class.java)
-    override fun getNowPlaying(
+    fun getNowPlaying(
         page: Int,
-        onSuccess: (movies : Model) -> Unit,
+        onSuccess: (movies: Model) -> Unit,
         onError: () -> Unit
     ) {
         api.getNowPlaying(page = page)
@@ -41,12 +41,71 @@ class MoviePresenter : iMoviePresenter {
             })
     }
 
-    override fun getNowTrending(
-        page: Int,
-        onSuccess: (movies : Model) -> Unit,
+    fun getNowTrending(
+        onSuccess: (movies: Model) -> Unit,
         onError: () -> Unit
     ) {
         api.getNowTrending()
+            .enqueue(object : Callback<Model> {
+                override fun onResponse(
+                    call: Call<Model>,
+                    response: Response<Model>
+                ) {
+                    if (response.isSuccessful) {
+                        val responseBody = response.body()
+//                        Log.d("trendingThisWeek", responseBody!!.movies.toString())
+                        if (responseBody != null) {
+                            onSuccess.invoke(responseBody)
+                        } else {
+                            onError.invoke()
+                        }
+                    } else {
+                        onError.invoke()
+                    }
+                }
+
+                override fun onFailure(call: Call<Model>, t: Throwable) {
+                    onError.invoke()
+                    Log.e("Repository", "onFailure", t)
+                }
+            })
+    }
+
+    fun getTop(
+        onSuccess: (movies: Model) -> Unit,
+        onError: () -> Unit
+    ) {
+        api.getTop()
+            .enqueue(object : Callback<Model> {
+                override fun onResponse(
+                    call: Call<Model>,
+                    response: Response<Model>
+                ) {
+                    if (response.isSuccessful) {
+                        val responseBody = response.body()
+//                        Log.d("trendingThisWeek", responseBody!!.movies.toString())
+                        if (responseBody != null) {
+                            onSuccess.invoke(responseBody)
+                        } else {
+                            onError.invoke()
+                        }
+                    } else {
+                        onError.invoke()
+                    }
+                }
+
+                override fun onFailure(call: Call<Model>, t: Throwable) {
+                    onError.invoke()
+                    Log.e("Repository", "onFailure", t)
+                }
+            })
+    }
+
+    fun getUpcoming(
+        onSuccess: (movies: Model) -> Unit,
+        onError: () -> Unit
+    ) {
+        api.getUpcoming()
             .enqueue(object : Callback<Model> {
                 override fun onResponse(
                     call: Call<Model>,

@@ -22,7 +22,7 @@ class HomeAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.itemView.tv_movie_category.text = movie.get(position).category
-        holder.itemView.home_recycler_view_horizontal.apply{
+        holder.itemView.home_recycler_view_horizontal.apply {
             layoutManager = LinearLayoutManager(
                 holder.itemView.home_recycler_view_horizontal.context,
                 RecyclerView.HORIZONTAL,
@@ -30,7 +30,6 @@ class HomeAdapter(
             )
             adapter = MovieAdapter(movie[position].movies)
         }
-
     }
 
     override fun getItemCount(): Int {

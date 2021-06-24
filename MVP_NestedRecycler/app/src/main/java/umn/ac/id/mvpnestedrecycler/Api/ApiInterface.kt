@@ -17,4 +17,14 @@ interface ApiInterface {
     fun getNowTrending(
         @Query("api_key") apiKey: String = "ca3cae85bb1e478656da8986f49e7ec7",
     ) : Call<Model>
+
+    @GET ("movie/top_rated")
+    fun getTop(
+        @Query("api_key") apiKey: String = "ca3cae85bb1e478656da8986f49e7ec7"
+    ) : Call<Model>
+
+    @GET ("movie/upcoming")
+    fun getUpcoming(
+        @Query("api_key") apiKey: String = "ca3cae85bb1e478656da8986f49e7ec7"
+    ) : Call<Model>
 }

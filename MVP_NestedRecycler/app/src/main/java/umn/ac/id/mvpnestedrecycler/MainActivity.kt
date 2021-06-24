@@ -21,14 +21,11 @@ class MainActivity : AppCompatActivity(), iMainActivity {
 
         moviePresenter = MoviePresenter()
 
-        moviePresenter.getNowPlaying(
-            onSuccess = ::onFetchedNow,
-            onError = ::onError
-        )
         moviePresenter.getNowTrending(
             onSuccess = ::onFetchedTrending,
             onError = ::onError
         )
+
     }
 
     override fun onError() {
@@ -42,6 +39,33 @@ class MainActivity : AppCompatActivity(), iMainActivity {
         rv_main.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rv_main.adapter = HomeAdapter(movs)
         pb_main.setVisibility(View.GONE)
+
+
+        moviePresenter.getTop(
+            onSuccess = ::onFetchedTop,
+            onError = ::onError
+        )
+    }
+
+    override fun onFetchedTop(arrayListTop: Model) {
+        var item = Model("Top Ratings", arrayListTop.movies)
+        movs.add(item)
+        rv_main.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        rv_main.adapter = HomeAdapter(movs)
+        pb_main.setVisibility(View.GONE)
+
+        moviePresenter.getUpcoming(
+            onSuccess = ::onFetchedUpcoming,
+            onError = ::onError
+        )
+    }
+
+    override fun onFetchedUpcoming(arrayListUpcoming: Model) {
+        var item = Model("Upcoming", arrayListUpcoming.movies)
+        movs.add(item)
+        rv_main.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        rv_main.adapter = HomeAdapter(movs)
+        pb_main.setVisibility(View.GONE)
     }
 
     override fun onFetchedTrending(arrayListTrending: Model) {
@@ -50,6 +74,11 @@ class MainActivity : AppCompatActivity(), iMainActivity {
         rv_main.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rv_main.adapter = HomeAdapter(movs)
         pb_main.setVisibility(View.GONE)
-    }
 
+        moviePresenter.getNowPlaying(
+            page = 1,
+            onSuccess = ::onFetchedNow,
+            onError = ::onError
+        )
+    }
 }
