@@ -1,9 +1,9 @@
-package umn.ac.id.mvpnestedrecycler.api
+package umn.ac.id.mvpnestedrecycler.Api
 
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
-import umn.ac.id.mvpnestedrecycler.model.Object
+import umn.ac.id.mvpnestedrecycler.Model.Object
 
 interface ApiInterface {
     @GET("movie/now_playing")

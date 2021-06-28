@@ -1,4 +1,4 @@
-package umn.ac.id.mvpnestedrecycler.model
+package umn.ac.id.mvpnestedrecycler.Model
 
 import com.google.gson.annotations.SerializedName
 

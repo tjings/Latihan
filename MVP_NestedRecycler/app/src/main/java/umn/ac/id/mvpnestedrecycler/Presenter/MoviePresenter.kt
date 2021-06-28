@@ -1,12 +1,12 @@
-package umn.ac.id.mvpnestedrecycler.presenter
+package umn.ac.id.mvpnestedrecycler.Presenter
 
 import android.util.Log
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import umn.ac.id.mvpnestedrecycler.api.ApiClient
-import umn.ac.id.mvpnestedrecycler.api.ApiInterface
-import umn.ac.id.mvpnestedrecycler.model.Object
+import umn.ac.id.mvpnestedrecycler.Api.ApiClient
+import umn.ac.id.mvpnestedrecycler.Api.ApiInterface
+import umn.ac.id.mvpnestedrecycler.Model.Object
 
 class MoviePresenter {
     private val api = ApiClient.createService(ApiInterface::class.java)

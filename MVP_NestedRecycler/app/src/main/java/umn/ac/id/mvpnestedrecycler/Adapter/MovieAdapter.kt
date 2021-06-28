@@ -1,4 +1,4 @@
-package umn.ac.id.mvpnestedrecycler.adapter
+package umn.ac.id.mvpnestedrecycler.Adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.row_layout_movie.view.*
 import umn.ac.id.mvpnestedrecycler.R
-import umn.ac.id.mvpnestedrecycler.model.Results
+import umn.ac.id.mvpnestedrecycler.Model.Results
 
 class MovieAdapter(
     val movieList: MutableList<Results>?

@@ -6,10 +6,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
-import umn.ac.id.mvpnestedrecycler.adapter.HomeAdapter
-import umn.ac.id.mvpnestedrecycler.model.Object
-import umn.ac.id.mvpnestedrecycler.presenter.MoviePresenter
-import umn.ac.id.mvpnestedrecycler.view.MainActivityPresenter
+import umn.ac.id.mvpnestedrecycler.Adapter.HomeAdapter
+import umn.ac.id.mvpnestedrecycler.Model.Object
+import umn.ac.id.mvpnestedrecycler.Presenter.MoviePresenter
+import umn.ac.id.mvpnestedrecycler.View.MainActivityPresenter
 
 class MainActivity : AppCompatActivity(), MainActivityPresenter {
     private var movs: ArrayList<Object> = arrayListOf()

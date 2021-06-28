@@ -1,4 +1,4 @@
-package umn.ac.id.mvpnestedrecycler.adapter
+package umn.ac.id.mvpnestedrecycler.Adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.row_layout_home.view.*
-import umn.ac.id.mvpnestedrecycler.model.Object
+import umn.ac.id.mvpnestedrecycler.Model.Object
 import umn.ac.id.mvpnestedrecycler.R
 
 class HomeAdapter constructor(

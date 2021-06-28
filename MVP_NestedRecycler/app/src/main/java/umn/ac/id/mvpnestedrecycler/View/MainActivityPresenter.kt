@@ -1,6 +1,6 @@
-package umn.ac.id.mvpnestedrecycler.view
+package umn.ac.id.mvpnestedrecycler.View
 
-import umn.ac.id.mvpnestedrecycler.model.Object
+import umn.ac.id.mvpnestedrecycler.Model.Object
 
 interface MainActivityPresenter {
     fun onError()
