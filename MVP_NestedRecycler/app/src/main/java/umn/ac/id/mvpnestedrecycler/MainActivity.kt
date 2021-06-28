@@ -6,79 +6,104 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
-import umn.ac.id.mvpnestedrecycler.Adapter.HomeAdapter
-import umn.ac.id.mvpnestedrecycler.Model.Model
-import umn.ac.id.mvpnestedrecycler.Presenter.MoviePresenter
-import umn.ac.id.mvpnestedrecycler.View.iMainActivity
+import umn.ac.id.mvpnestedrecycler.adapter.HomeAdapter
+import umn.ac.id.mvpnestedrecycler.model.Object
+import umn.ac.id.mvpnestedrecycler.presenter.MoviePresenter
+import umn.ac.id.mvpnestedrecycler.view.MainActivityPresenter
 
-class MainActivity : AppCompatActivity(), iMainActivity {
-    var movs: ArrayList<Model> = arrayListOf()
-    internal lateinit var moviePresenter: MoviePresenter
+class MainActivity : AppCompatActivity(), MainActivityPresenter {
+    private var movs: ArrayList<Object> = arrayListOf()
+    private lateinit var moviePresenter: MoviePresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         moviePresenter = MoviePresenter()
+        movs.add(Object("Now Playing", null))
+        movs.add(Object("Trending", null))
+        movs.add(Object("Top", null))
+        movs.add(Object("Upcoming", null))
+
+        rv_main.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        rv_main.adapter = HomeAdapter(movs)
 
         moviePresenter.getNowTrending(
             onSuccess = ::onFetchedTrending,
             onError = ::onError
         )
-
-    }
-
-    override fun onError() {
-        Toast.makeText(this, "Error Fetching", Toast.LENGTH_SHORT).show()
-        pb_main.setVisibility(View.GONE);
-    }
-
-    override fun onFetchedNow(arrayListNow: Model) {
-        var item = Model("Now Playing", arrayListNow.movies)
-        movs.add(item)
-        rv_main.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        rv_main.adapter = HomeAdapter(movs)
-        pb_main.setVisibility(View.GONE)
-
-
         moviePresenter.getTop(
             onSuccess = ::onFetchedTop,
             onError = ::onError
         )
-    }
-
-    override fun onFetchedTop(arrayListTop: Model) {
-        var item = Model("Top Ratings", arrayListTop.movies)
-        movs.add(item)
-        rv_main.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        rv_main.adapter = HomeAdapter(movs)
-        pb_main.setVisibility(View.GONE)
-
         moviePresenter.getUpcoming(
             onSuccess = ::onFetchedUpcoming,
             onError = ::onError
         )
-    }
-
-    override fun onFetchedUpcoming(arrayListUpcoming: Model) {
-        var item = Model("Upcoming", arrayListUpcoming.movies)
-        movs.add(item)
-        rv_main.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        rv_main.adapter = HomeAdapter(movs)
-        pb_main.setVisibility(View.GONE)
-    }
-
-    override fun onFetchedTrending(arrayListTrending: Model) {
-        var item = Model("Trending This Week", arrayListTrending.movies)
-        movs.add(item)
-        rv_main.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        rv_main.adapter = HomeAdapter(movs)
-        pb_main.setVisibility(View.GONE)
-
         moviePresenter.getNowPlaying(
-            page = 1,
             onSuccess = ::onFetchedNow,
             onError = ::onError
         )
+    }
+
+    override fun onError() {
+        Toast.makeText(this, "Error Fetching", Toast.LENGTH_SHORT).show()
+        pb_main.visibility = View.GONE
+    }
+
+    override fun onFetchedNow(arrayListNow: Object) {
+        val movie = movs.firstOrNull {
+            it.category == "Now Playing"
+        }
+        movie?.let {
+            if (it.movies == null) {
+                it.movies = arrayListOf()
+            }
+            it.movies!!.addAll(arrayListNow.movies!!.toMutableList())
+            rv_main.adapter?.notifyDataSetChanged()
+        }
+    }
+
+    override fun onFetchedTop(arrayListTop: Object) {
+        pb_main.visibility = View.GONE
+        val movie = movs.firstOrNull {
+            it.category == "Top"
+        }
+        movie?.let {
+            if (it.movies == null) {
+                it.movies = arrayListOf()
+            }
+            it.movies!!.addAll(arrayListTop.movies!!.toMutableList())
+            rv_main.adapter?.notifyDataSetChanged()
+        }
+    }
+
+    override fun onFetchedUpcoming(arrayListUpcoming: Object) {
+        pb_main.visibility = View.GONE
+        val movie = movs.firstOrNull {
+            it.category == "Upcoming"
+        }
+        movie?.let {
+            if (it.movies == null) {
+                it.movies = arrayListOf()
+            }
+            it.movies!!.addAll(arrayListUpcoming.movies!!.toMutableList())
+            rv_main.adapter?.notifyDataSetChanged()
+        }
+    }
+
+    override fun onFetchedTrending(arrayListTrending: Object) {
+        pb_main.visibility = View.GONE
+
+        val movie = movs.firstOrNull {
+            it.category == "Trending"
+        }
+        movie?.let {
+            if (it.movies == null) {
+                it.movies = arrayListOf()
+            }
+            it.movies!!.addAll(arrayListTrending.movies!!.toMutableList())
+            rv_main.adapter?.notifyDataSetChanged()
+        }
     }
 }

@@ -1,25 +1,26 @@
-package umn.ac.id.mvpnestedrecycler.Presenter
+package umn.ac.id.mvpnestedrecycler.presenter
 
 import android.util.Log
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import umn.ac.id.mvpnestedrecycler.Api.ApiClient
-import umn.ac.id.mvpnestedrecycler.Api.ApiInterface
-import umn.ac.id.mvpnestedrecycler.Model.Model
+import umn.ac.id.mvpnestedrecycler.api.ApiClient
+import umn.ac.id.mvpnestedrecycler.api.ApiInterface
+import umn.ac.id.mvpnestedrecycler.model.Object
 
 class MoviePresenter {
     private val api = ApiClient.createService(ApiInterface::class.java)
+
     fun getNowPlaying(
-        page: Int,
-        onSuccess: (movies: Model) -> Unit,
+        page: Int = 1,
+        onSuccess: (movies: Object) -> Unit,
         onError: () -> Unit
     ) {
         api.getNowPlaying(page = page)
-            .enqueue(object : Callback<Model> {
+            .enqueue(object : Callback<Object> {
                 override fun onResponse(
-                    call: Call<Model>,
-                    response: Response<Model>
+                    call: Call<Object>,
+                    response: Response<Object>
                 ) {
                     if (response.isSuccessful) {
                         val responseBody = response.body()
@@ -34,7 +35,7 @@ class MoviePresenter {
                     }
                 }
 
-                override fun onFailure(call: Call<Model>, t: Throwable) {
+                override fun onFailure(call: Call<Object>, t: Throwable) {
                     onError.invoke()
                     Log.e("Repository", "onFailure", t)
                 }
@@ -42,14 +43,14 @@ class MoviePresenter {
     }
 
     fun getNowTrending(
-        onSuccess: (movies: Model) -> Unit,
+        onSuccess: (movies: Object) -> Unit,
         onError: () -> Unit
     ) {
         api.getNowTrending()
-            .enqueue(object : Callback<Model> {
+            .enqueue(object : Callback<Object> {
                 override fun onResponse(
-                    call: Call<Model>,
-                    response: Response<Model>
+                    call: Call<Object>,
+                    response: Response<Object>
                 ) {
                     if (response.isSuccessful) {
                         val responseBody = response.body()
@@ -64,7 +65,7 @@ class MoviePresenter {
                     }
                 }
 
-                override fun onFailure(call: Call<Model>, t: Throwable) {
+                override fun onFailure(call: Call<Object>, t: Throwable) {
                     onError.invoke()
                     Log.e("Repository", "onFailure", t)
                 }
@@ -72,14 +73,14 @@ class MoviePresenter {
     }
 
     fun getTop(
-        onSuccess: (movies: Model) -> Unit,
+        onSuccess: (movies: Object) -> Unit,
         onError: () -> Unit
     ) {
         api.getTop()
-            .enqueue(object : Callback<Model> {
+            .enqueue(object : Callback<Object> {
                 override fun onResponse(
-                    call: Call<Model>,
-                    response: Response<Model>
+                    call: Call<Object>,
+                    response: Response<Object>
                 ) {
                     if (response.isSuccessful) {
                         val responseBody = response.body()
@@ -94,7 +95,7 @@ class MoviePresenter {
                     }
                 }
 
-                override fun onFailure(call: Call<Model>, t: Throwable) {
+                override fun onFailure(call: Call<Object>, t: Throwable) {
                     onError.invoke()
                     Log.e("Repository", "onFailure", t)
                 }
@@ -102,14 +103,14 @@ class MoviePresenter {
     }
 
     fun getUpcoming(
-        onSuccess: (movies: Model) -> Unit,
+        onSuccess: (movies: Object) -> Unit,
         onError: () -> Unit
     ) {
         api.getUpcoming()
-            .enqueue(object : Callback<Model> {
+            .enqueue(object : Callback<Object> {
                 override fun onResponse(
-                    call: Call<Model>,
-                    response: Response<Model>
+                    call: Call<Object>,
+                    response: Response<Object>
                 ) {
                     if (response.isSuccessful) {
                         val responseBody = response.body()
@@ -124,7 +125,7 @@ class MoviePresenter {
                     }
                 }
 
-                override fun onFailure(call: Call<Model>, t: Throwable) {
+                override fun onFailure(call: Call<Object>, t: Throwable) {
                     onError.invoke()
                     Log.e("Repository", "onFailure", t)
                 }

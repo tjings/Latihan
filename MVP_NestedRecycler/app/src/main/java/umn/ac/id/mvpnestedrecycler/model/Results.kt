@@ -1,6 +1,6 @@
-package umn.ac.id.mvpnestedrecycler.Model
+package umn.ac.id.mvpnestedrecycler.model
 
-data class ModelKecil(
+data class Results(
     val id: Int,
     val overview: String,
     val poster_path: String,

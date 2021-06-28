@@ -1,4 +1,4 @@
-package umn.ac.id.mvpnestedrecycler.Api
+package umn.ac.id.mvpnestedrecycler.api
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
